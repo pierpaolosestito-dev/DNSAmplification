@@ -1,4 +1,4 @@
-This Proof-of-Concept[PoC] tool exploit DNS resolvers to perform an huge amplification attack against a specific Web Server (specifying its FQDN) or using IP address.
+This Proof-of-Concept[PoC] tool exploit DNS resolvers to perform an huge amplification attack against a specific Victim (specifying its IP).
 It hides the basic idea behind the attack.
 
 DNS Amplifications Attacks are performed by an attacker to increase the bandiwidth amount in order to sends a targeted potential victim.
@@ -47,7 +47,7 @@ STATUS=REFUSED
 
 
 This PoC uses Shodan APIs in order to identifies open resolvers across the internet, saves IP address to a CSV file and
-using "dig" command it's able to target victim using open DNS resolvers.
+using Scapy in order to make a DNS query with neighbour's IP spoofed and redirect the replies-storm to him.
 
 PRE-REQUISITES:
 	Shodan library installed.
@@ -55,6 +55,6 @@ PRE-REQUISITES:
 	Shodan API-Key for Developer.
 			https://account.shodan.io/
 			
-	Download the script and launch.
+	Scapy - libary for packet manipulation.
 	
-	ù
+	
