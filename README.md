@@ -29,26 +29,8 @@ There are Linux built-ins command that helps to discover if a particular DNS ser
 
 dig TARGET@x.x.x.x where's x.x.x.x is the DNS ip.
 
-A DNS Open-resolved configured as we desire will return a response similar to this example:
-```
-; <<>> [Ubuntu-Host] <<>> TARGET @ x.x.x.x
-;; global options: +cmd
-;; Got answer:
-;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 53931
-;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 0
-```
-STATUS = NOERROR
-Instead, an Authorative DNS will return a response like this:
-
-```
-; <<>> [Ubuntu-Host] <<>> TARGET @x.x.x.x
-;; global options: +cmd
-;; Got answer:
-;; ->>HEADER<<- opcode: QUERY, status: REFUSED, id: 47106
-;; flags: qr rd; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 0
-;; WARNING: recursion requested but not available
-```
-STATUS=REFUSED
+A DNS Open-resolved configured as we desire will return a response with status: NOERROR
+Instead, an Authorative DNS will return a response with status: REFUSED
 
 
 This PoC uses Shodan APIs in order to identifies open resolvers across the internet, saves IP address into a json that will be convert in a txt file and
