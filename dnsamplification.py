@@ -15,9 +15,13 @@ console = Console()
 
 
 def main(api_key: str,victim:str,targeted_domain:str):
+    #Check on VICTIM format
     if not re.match('^(?:(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])(\.(?!$)|$)){4}$', victim):
         print("ERROR: Victim must be an IP")
         return
+    #Check on TARGETED_DOMAIN format
+    if not re.match('^(?:www\.)*\w+\.[a-z0-9]+', targeted_domain):
+        print("FQDN must respect the format: www.domain.xyz or domain.xyz")
 
     #Initialize
     with console.status("[bold green]Shodan init key...[/bold green]"):
