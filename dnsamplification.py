@@ -2,11 +2,10 @@
 
 import typer
 import re
-import subprocess
 import os
 from rich.console import Console
-from time import sleep
 from scapy.all import *
+
 def subprocess_call_commands(command):
     os.system(command)
 
